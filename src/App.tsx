@@ -1,26 +1,71 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC, useEffect } from "react"
+import { useAppDispatch, useAppSelector } from "./hooks/redux"
+import { fetchCoins } from "./store/reducers/ActionCreators"
+import {
+  Box,
+  Heading,
+  Text,
+  Image,
+  Table,
+  Container,
+  Tr,
+  Tbody,
+  Td,
+} from "@chakra-ui/react"
+import { ICoin } from "./models/ICoin"
+import Header from "./Components/Header/Header"
+import Loader from "./Components/UI/Loader"
 
-function App() {
+const App: FC = () => {
+  const dispatch = useAppDispatch()
+  const { coins, isLoading, error } = useAppSelector(
+    (state) => state.coinReducer
+  )
+  useEffect(() => {
+    dispatch(fetchCoins())
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Box>
+      <Header />
+      <Container maxW="container.xl">
+        {isLoading && <Loader />}
+        {error && <Heading>{error}</Heading>}
+        <Box maxW="590px">
+          <Table size="lg" variant="simple" colorScheme="black">
+            {coins.map((coin: ICoin) => (
+              <Tbody>
+                <Tr>
+                  <Td>
+                    <Image
+                      src={`https://cryptocompare.com${coin.CoinInfo.ImageUrl}`}
+                      w={10}
+                      h={10}
+                    />
+                  </Td>
+                  <Td>
+                    <Text fontSize="18px" fontWeight="600">
+                      {coin.CoinInfo.FullName}
+                    </Text>
+                  </Td>
+                  <Td>
+                    <Text fontSize="14px" fontWeight="800">
+                      {coin.CoinInfo.Name}
+                    </Text>
+                  </Td>
+                  <Td>
+                    <Text fontSize="20px" fontWeight="500">
+                      {coin.RAW.USD.PRICE}$
+                    </Text>
+                  </Td>
+                </Tr>
+              </Tbody>
+            ))}
+          </Table>
+        </Box>
+      </Container>
+    </Box>
+  )
 }
 
-export default App;
+export default App
