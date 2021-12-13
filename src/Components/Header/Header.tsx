@@ -11,7 +11,6 @@ import { Link } from "react-router-dom"
 
 const Header: FC = () => {
   const { colorMode, toggleColorMode } = useColorMode()
-
   const isDark = colorMode === "dark"
   return (
     <Flex bgGradient="linear(to-l, gray.300, yellow.400, pink.200)" as="header">

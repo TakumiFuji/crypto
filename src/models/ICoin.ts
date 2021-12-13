@@ -1,5 +1,6 @@
 interface USD {
   PRICE: number
+  VOLUME24HOUR?: number
 }
 interface Raw {
   USD: USD

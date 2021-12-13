@@ -4,8 +4,8 @@ import { fetchCoins } from "./ActionCreators"
 
 interface CoinState {
   coins: ICoin[]
-  isLoading: boolean
-  error: string
+  isLoading?: boolean
+  error?: string
 }
 
 const initialState: CoinState = {
