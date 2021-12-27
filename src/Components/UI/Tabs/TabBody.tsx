@@ -1,11 +1,10 @@
-import { Box } from "@chakra-ui/react"
 import { FC } from "react"
 
 type Prop = {
   title: string
 }
 const TabBody: FC<Prop> = ({ children }) => {
-  return <Box>{children}</Box>
+  return <div>{children}</div>
 }
 
 export default TabBody

@@ -1,0 +1,29 @@
+.btn {
+  margin: 10px;
+  button {
+    padding: 5px;
+    font-size: 18px;
+    color: rgb(102, 97, 97);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    &:hover,
+    &:active,
+    &:focus {
+      color: black;
+      border-bottom: 2px solid black;
+    }
+  }
+}
+
+.btn.dark {
+  button {
+    color: rgb(231, 224, 230);
+    &:hover,
+    &:active,
+    &:focus {
+      color: #efefef;
+      border-bottom: 2px solid #efefef;
+    }
+  }
+}

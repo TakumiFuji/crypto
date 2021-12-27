@@ -1,0 +1,51 @@
+.modal {
+  display: none;
+}
+.modal.active {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: rgb(0, 0, 0);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  transition: 0.7s ease-in;
+
+  div {
+    margin-top: 20px;
+    height: 100vh;
+    a {
+      text-decoration: none;
+      font-size: 36px;
+      font-weight: 600;
+      color: white;
+    }
+  }
+}
+
+.closebtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 20px;
+  .onespan {
+    display: block;
+    height: 2px;
+    width: 40px;
+    background-color: white;
+    transform: rotate(43deg);
+  }
+  .twospan {
+    // margin-top: 10px;
+    display: block;
+    height: 2px;
+    width: 40px;
+    background-color: white;
+    transform: rotate(-45deg);
+  }
+}

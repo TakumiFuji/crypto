@@ -1,6 +1,6 @@
-import { Box } from "@chakra-ui/react"
 import { FC, ReactElement, useState } from "react"
 import TabTitle from "./TabTitle"
+import "./TabMain.scss"
 
 type TabsProps = {
   children: ReactElement[]
@@ -9,8 +9,8 @@ type TabsProps = {
 const TabMain: FC<TabsProps> = ({ children }) => {
   const [selectedTab, setSelectedTab] = useState(0)
   return (
-    <Box>
-      <Box d="flex">
+    <div className="mainTab">
+      <div className="mainTab_tabs">
         {children.map((item, index) => {
           return (
             <TabTitle
@@ -21,10 +21,10 @@ const TabMain: FC<TabsProps> = ({ children }) => {
             />
           )
         })}
-      </Box>
+      </div>
 
-      <Box>{children[selectedTab]}</Box>
-    </Box>
+      <div>{children[selectedTab]}</div>
+    </div>
   )
 }
 

@@ -1,0 +1,124 @@
+.headerMain {
+  height: 85px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(228, 48, 199, 0.927608543417367) 22%,
+    rgba(223, 84, 84, 1) 100%
+  );
+  &_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1400px;
+    &_text {
+      margin-left: 25px;
+      color: rgba(223, 84, 84, 1);
+      font-size: 36px;
+      font-weight: 800;
+      text-shadow: rgb(58, 48, 48) 1px 0 10px;
+      @media (max-width: 640px) {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+.navbar {
+  display: flex;
+  div {
+    margin: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    a {
+      color: black;
+      text-decoration: none;
+      transition: 0.6s ease-in;
+      &:hover,
+      &:active,
+      &:focus {
+        color: blanchedalmond;
+        border-bottom: 2px solid blanchedalmond;
+      }
+    }
+    @media (max-width: 755px) {
+      display: none;
+    }
+  }
+}
+
+.darkmode {
+  input {
+    appearance: none;
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+    margin: 0;
+    vertical-align: top;
+    background: #fff;
+    border: 1px solid #ff3ee5;
+    border-radius: 15px;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
+    cursor: pointer;
+    &::after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      left: 3px;
+      top: 1.5px;
+      width: 20px;
+      height: 20px;
+      background-color: rgba(0, 0, 255, 0.582);
+      border-radius: 50%;
+      transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
+      transform: translateX(0);
+    }
+    &:checked::after {
+      transform: translateX(calc(100% + 3px));
+      background-color: #fff;
+    }
+    &:checked {
+      background-color: rgba(0, 0, 255, 0.582);
+    }
+  }
+}
+.burgerMenu.active {
+  display: none;
+}
+.burgerMenu {
+  z-index: 1;
+  display: none;
+  margin-right: 20px;
+  @media (max-width: 755px) {
+    position: relative;
+    width: 40px;
+    height: 35px;
+    display: block;
+    margin-left: 10px;
+    &::after,
+    &::before,
+    span {
+      height: 3px;
+      width: 100%;
+      position: absolute;
+      background: #000000;
+      margin: 0 auto;
+    }
+    span {
+      top: 16px;
+    }
+    &::after,
+    &::before {
+      content: "";
+    }
+    &::after {
+      bottom: 5px;
+    }
+    &::before {
+      top: 5px;
+    }
+  }
+}

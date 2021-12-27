@@ -1,52 +1,52 @@
-import {
-  Box,
-  Text,
-  Switch,
-  Flex,
-  useColorMode,
-  Container,
-} from "@chakra-ui/react"
-import { FC } from "react"
+import { ChangeEvent, FC, useEffect, useState } from "react"
+import "./header.scss"
+import MyModal from "./MyModal/MyModal"
+import { useAppDispatch } from "../../hooks/redux"
+import { setDarkMode } from "../../store/reducers/ThemeSlice"
 import { Link } from "react-router-dom"
 
 const Header: FC = () => {
-  const { colorMode, toggleColorMode } = useColorMode()
-  const isDark = colorMode === "dark"
+  const [activeModal, setActiveModal] = useState<boolean>(false)
+  const [dark, setDark] = useState<boolean>(false)
+
+  const dispatch = useAppDispatch()
+
+  const handleChangeDarkMode = (e: ChangeEvent<HTMLInputElement>) => {
+    return setDark(e.target.checked)
+  }
+  useEffect(() => {
+    dispatch(setDarkMode(dark))
+  }, [dark, dispatch])
+
   return (
-    <Flex bgGradient="linear(to-l, gray.300, yellow.400, pink.200)" as="header">
-      <Container
-        maxW="container.xl"
-        d="flex"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Box>
-          <Text fontSize="3xl" fontWeight="600" ml={5}>
-            TakumiFujiCrypto
-          </Text>
-        </Box>
-        <Flex>
-          <Box mr={5}>
-            <Link to="/about">About us</Link>
-          </Box>
-          <Box mr={5}>
+    <header className="headerMain">
+      <div className="headerMain_wrapper">
+        <div className="headerMain_wrapper_text">
+          <p>TakumiFujiCrypto</p>
+        </div>
+        <nav className="navbar">
+          <div>
+            <Link to="/">About us</Link>
+          </div>
+          <div>
+            <Link to="/registration">Register</Link>
+          </div>
+          <div>
             <Link to="/login">Login</Link>
-          </Box>
-          <Box mr={5}>
-            <Link to="/registration">Sign In</Link>
-          </Box>
-          <Box>
-            <Switch
-              mr={5}
-              size="md"
-              colorScheme="red"
-              isChecked={isDark}
-              onChange={toggleColorMode}
-            />
-          </Box>
-        </Flex>
-      </Container>
-    </Flex>
+          </div>
+          <div className="darkmode">
+            <input type="checkbox" onChange={handleChangeDarkMode} />
+          </div>
+        </nav>
+        <div
+          className={activeModal ? "burgerMenu active" : "burgerMenu"}
+          onClick={() => setActiveModal(true)}
+        >
+          <span></span>
+        </div>
+      </div>
+      <MyModal active={activeModal} setActive={setActiveModal} />
+    </header>
   )
 }
 

@@ -1,8 +1,7 @@
-import { Table, Tbody, Tr, Td, Image, Text } from "@chakra-ui/react"
 import { FC } from "react"
 import { ICoin } from "../../models/ICoin"
 import { useAppSelector } from "../../hooks/redux"
-// import Loader from "../UI/Loader"
+import "./tablecoins.scss"
 
 export enum TableTitleProp {
   SortedByAll = "SortedByAll",
@@ -17,6 +16,7 @@ type TableCoinsProps = {
 
 const TableCoins: FC<TableCoinsProps> = ({ value, title }) => {
   const { coins } = useAppSelector((state) => state.coinReducer)
+  const { darkMode } = useAppSelector((state) => state.themeReducer)
 
   const filteredCoins = coins.filter((coin) => {
     return (
@@ -34,43 +34,43 @@ const TableCoins: FC<TableCoinsProps> = ({ value, title }) => {
   }
 
   return (
-    <Table size="lg" variant="simple" colorScheme="black">
-      {filteredCoins.map((coin: ICoin) => {
-        return (
-          <Tbody key={coin.CoinInfo.Id}>
-            <Tr>
-              <Td>
-                <Image
-                  src={`https://cryptocompare.com${coin.CoinInfo.ImageUrl}`}
-                  w={10}
-                  h={10}
-                />
-              </Td>
-              <Td>
-                <Text fontSize="18px" fontWeight="600">
-                  {coin.CoinInfo.FullName}
-                </Text>
-              </Td>
-              <Td>
-                <Text fontSize="14px" fontWeight="800">
-                  {coin.CoinInfo.Name}
-                </Text>
-              </Td>
-              <Td>
-                <Text fontSize="20px" fontWeight="500">
-                  {coin.RAW.USD.PRICE}$
-                </Text>
-              </Td>
-              <Td>
-                <Text fontSize="16px" fontWeight="600">
-                  V / 24H {coin.RAW.USD.VOLUME24HOUR?.toFixed(2)}
-                </Text>
-              </Td>
-            </Tr>
-          </Tbody>
-        )
-      })}
-    </Table>
+    <div>
+      {filteredCoins.length ? (
+        <table className={darkMode ? "coinTable dark" : "coinTable"}>
+          {filteredCoins.map((coin: ICoin) => {
+            return (
+              <tbody key={coin.CoinInfo.Id}>
+                <tr className="coinTable-tr">
+                  <td>
+                    <img
+                      src={`https://cryptocompare.com${coin.CoinInfo.ImageUrl}`}
+                      alt={`${coin.CoinInfo.FullName}`}
+                      className="coinTable_image"
+                    />
+                  </td>
+                  <td>
+                    <p>{coin.CoinInfo.FullName}</p>
+                  </td>
+                  <td>
+                    <p>{coin.CoinInfo.Name}</p>
+                  </td>
+                  <td>
+                    <p>{coin.RAW.USD.PRICE}$</p>
+                  </td>
+                  <td>
+                    <p>{coin.RAW.USD.VOLUME24HOUR?.toFixed(2)}</p>
+                  </td>
+                </tr>
+              </tbody>
+            )
+          })}
+        </table>
+      ) : (
+        <h1 className={darkMode ? "lengthMessage" : ""}>
+          По вашему запросу ничего не найдено!
+        </h1>
+      )}
+    </div>
   )
 }
 

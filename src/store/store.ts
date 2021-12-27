@@ -1,8 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import coinReducer from "./reducers/CoinSlice"
+import themeReducer from "./reducers/ThemeSlice"
+import userReducer from "./reducers/UserSlice"
 
 const rootReducer = combineReducers({
   coinReducer,
+  themeReducer,
+  userReducer,
 })
 
 export const setupStore = () => {
